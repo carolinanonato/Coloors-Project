@@ -5,8 +5,16 @@ const sliders = document.querySelectorAll('input[type="range"]');
 const currentHexes = document.querySelectorAll(".color h2")
 
 let initialColors;
-//Functions
 
+
+//event listeners
+
+sliders.forEach(slider => {
+    slider.addEventListener('input', hslControls)
+});
+
+
+//Functions
 //color generator
 
 function generateHex() {
@@ -76,6 +84,28 @@ function colorizeSliders(color, hue, brightness, saturation) {
 }
 
 
+function hslControls(e){
+    const index =
+    e.target.getAttribute("data-bright") ||
+    e.target.getAttribute("data-hue") ||
+    e.target.getAttribute("data-sat");
+
+   let sliders = e.target.parentElement.querySelectorAll('input[type="range"]');
+   const hue = sliders[0];
+   const brightness = sliders[1];
+   const saturation = sliders[2];
+
+    const bgColor = colorDivs[index].querySelector('h2').innerText;
+   
+    let color = chroma(bgColor)
+        .set('hsl.s', saturation.value)
+        .set('hsl.l', brightness.value)
+        .set('hsl.h', hue.value);
+
+    colorDivs[index].style.backgroundColor=color;
+
+    
+}
 
 randomColors();
 
