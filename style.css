@@ -48,14 +48,14 @@ svg {
   bottom: 0%;
   background: white;
   padding: 1rem;
-  opacity: 0;
+  /* opacity: 0; */
   background-color: rgba(255, 255, 255);
   width: 80%;
-  pointer-events: none;
+  /* pointer-events: none; */
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   /* We are adding an adjustment class */
-  transform: translateY(100px);
+  /* transform: translateY(100px); */
   transition: all 0.5s ease-in-out;
 }
 
@@ -120,4 +120,14 @@ svg {
   background: none;
   cursor: pointer;
   margin: 2rem 0rem;
+}
+
+/* slider stuff */
+input[type="range"] {
+  -webkit-appearance: none;
+  margin: 1rem 0rem;
+  width: 100%;
+  position: relative;
+  border-radius: 1rem;
+  cursor: pointer;
 }
