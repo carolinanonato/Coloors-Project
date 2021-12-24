@@ -53,6 +53,12 @@ closeAdjustments.forEach((button, index) => {
     })
 })
 
+lockButton.forEach((button, index) => {
+    button.addEventListener(`click`, () => {
+      addLockClass(button, index);
+    });
+  });
+
 //Functions
 //color generator
 
@@ -73,6 +79,11 @@ function generateHex() {
     return hexColor;
 }
 
+function addLockClass(button, index) {
+    colorDivs[index].classList.toggle(`locked`);
+    lockButton[index].firstChild.classList.toggle(`fa-lock-open`);
+    lockButton[index].firstChild.classList.toggle(`fa-lock`);
+  }
 
 function randomColors() {
     
@@ -81,15 +92,20 @@ function randomColors() {
     colorDivs.forEach((div, index) => {
         const hexText = div.children[0];
         const randomColor = generateHex();
-
+     
         //add it to the array
-
+       if(div.classList.contains('locked')) {
+           initialColors.push(hexText.innerText)
+           return;
+       } else {
         initialColors.push(chroma(randomColor).hex());
+       }
 
+   
         //add the color to the bg
         div.style.backgroundColor = randomColor;
         hexText.innerText = randomColor;
-
+        
         //check for contrast
         checkTextContrast(randomColor, hexText);
 
