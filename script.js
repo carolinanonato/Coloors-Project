@@ -61,6 +61,8 @@ lockButton.forEach((button, index) => {
     });
   });
 
+
+
 //Functions
 //color generator
 
@@ -275,6 +277,38 @@ function closePalette(e) {
     saveContainer.classList.remove('active');
     popup.classList.remove('active')
 }
+
+submitSave.addEventListener("click", savePalette);
+
+function savePalette(e) {
+    saveContainer.classList.remove('active');
+    popup.classList.remove('active');
+    const name = saveInput.value;
+    const colors = [];
+    currentHexes.forEach(hex => {
+        colors.push(hex.innerText);
+    });
+    //generate object
+
+    let paletteNr = savedPalettes.length;
+    const paletteObj = {name, colors, nr: paletteNr}
+    savedPalettes.push(paletteObj);
+
+    //save to local storage
+    saveToLocal(paletteObj);
+    saveInput.value="";
+}
+
+function savetoLocal(paletteObj) {
+    let localPalettes;
+    if (localStorage.getItem("palettes") === null) {
+      localPalettes = [];
+    } else {
+      localPalettes = JSON.parse(localStorage.getItem("palettes"));
+    }
+    localPalettes.push(paletteObj);
+    localStorage.setItem("palettes", JSON.stringify(localPalettes));
+  }
 
 
 randomColors();
